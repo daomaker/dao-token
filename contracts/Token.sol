@@ -6,12 +6,11 @@ import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
 contract Token is ERC20, ERC20Detailed, Ownable {
 
-    string private _name = "DAOMaker Token";
-    string private _symbol = "DAO";
-    uint private constant _numTokens = 312000000;
+    string private _name = "DAO Maker Token";
+    string private constant _symbol = "DAO";
+    uint   private constant _numTokens = 312000000;
     
     event NameChanged(string newName, address by);
-    event SymbolChanged(string newSymbol, address by);
 
     constructor () public ERC20Detailed(_name, _symbol, 18) {
         _mint(msg.sender, _numTokens * (10 ** uint256(decimals())));
@@ -24,14 +23,5 @@ contract Token is ERC20, ERC20Detailed, Ownable {
     
     function name() public view returns (string memory) {
         return _name;
-    }
-    
-    function changeSymbol(string memory symbol) public onlyOwner {
-        _symbol = symbol;
-        emit SymbolChanged(symbol, msg.sender);
-    }
-    
-    function symbol() public view returns (string memory) {
-        return _symbol;
     }
 }
